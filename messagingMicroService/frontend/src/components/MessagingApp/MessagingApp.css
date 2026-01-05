@@ -1,0 +1,131 @@
+/* MessagingApp Main Container Styles */
+
+.messaging-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+.messaging-app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.messaging-app-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.ws-status {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.ws-status.connected {
+  background: rgba(76, 175, 80, 0.3);
+}
+
+.ws-status.disconnected,
+.ws-status.error {
+  background: rgba(244, 67, 54, 0.3);
+}
+
+.messaging-app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.conversations-sidebar {
+  width: 320px;
+  min-width: 280px;
+  max-width: 400px;
+  background: white;
+  border-right: 1px solid #e0e0e0;
+  overflow-y: auto;
+}
+
+.messages-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .messaging-app-body {
+    flex-direction: column;
+  }
+
+  .conversations-sidebar {
+    width: 100%;
+    max-width: 100%;
+    height: 40%;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .messages-main {
+    height: 60%;
+  }
+
+  .messaging-app-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .user-info {
+    gap: 0.5rem;
+  }
+}
+
+/* Scrollbar Styling */
+.conversations-sidebar::-webkit-scrollbar,
+.messages-main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.conversations-sidebar::-webkit-scrollbar-track,
+.messages-main::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.conversations-sidebar::-webkit-scrollbar-thumb,
+.messages-main::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+.conversations-sidebar::-webkit-scrollbar-thumb:hover,
+.messages-main::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

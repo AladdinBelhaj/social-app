@@ -1,0 +1,125 @@
+/* MessageInput Component Styles */
+
+.message-input-container {
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
+}
+
+.message-input-form {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-end;
+}
+
+.input-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.message-textarea {
+  width: 100%;
+  min-height: 44px;
+  max-height: 150px;
+  padding: 0.8rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 22px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: none;
+  transition: all 0.3s ease;
+  line-height: 1.4;
+}
+
+.message-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.message-textarea:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.message-textarea::placeholder {
+  color: #999;
+}
+
+.send-button {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.send-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.send-button:active:not(:disabled) {
+  transform: scale(1);
+}
+
+.send-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #ccc;
+}
+
+.send-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.spinner-small {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.input-hint {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #999;
+  text-align: center;
+}
+
+.input-hint kbd {
+  background: #f0f0f0;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.7rem;
+  border: 1px solid #d0d0d0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .message-input-container {
+    padding: 0.8rem 1rem 0.5rem 1rem;
+  }
+
+  .input-hint {
+    display: none;
+  }
+}

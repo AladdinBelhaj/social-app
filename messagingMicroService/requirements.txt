@@ -1,0 +1,22 @@
+# Messaging Microservice - Dependencies
+
+# Web Framework
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy
+aiomysql
+
+# Validation & Settings
+pydantic
+pydantic-settings
+
+# Authentication
+pyjwt
+httpx
+
+# Utilities
+python-dotenv
+# Service Registry
+py-eureka-client
