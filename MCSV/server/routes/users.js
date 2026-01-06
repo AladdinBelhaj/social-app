@@ -58,10 +58,10 @@ router.put('/me', authMiddleware, async (req, res) => {
 
     const [[userRow]] = await pool.query('SELECT * FROM users WHERE id = ?', [req.user.id]);
 
-    // ✅ SYNC PROFILE UPDATE TO MESSAGING SERVICE
+
     try {
       await axios.post(
-        'http://localhost:8000/api/messaging/users/sync',
+        'http://localhost:8762/api/messaging/users/sync',
         {
           username: userRow.username,
           email: userRow.email,
@@ -80,8 +80,7 @@ router.put('/me', authMiddleware, async (req, res) => {
       console.log(`✓ User profile ${userRow.username} (id=${req.user.id}) synced to messaging service`);
     } catch (syncError) {
       console.error(`✗ Failed to sync profile update: ${syncError.message}`);
-      // Don't fail profile update - this is non-critical
-    }
+        }
 
     return res.json({ user: mapUser(userRow) });
   } catch (error) {

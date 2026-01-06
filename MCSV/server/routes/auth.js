@@ -49,10 +49,10 @@ router.post('/register', async (req, res) => {
       { expiresIn: '7d' },
     );
 
-    // ✅ SYNC USER TO MESSAGING SERVICE
+    
     try {
       await axios.post(
-        'http://localhost:8000/api/messaging/users/sync',
+        'http://localhost:8762/api/messaging/users/sync',
         {
           username: username,
           email: email,

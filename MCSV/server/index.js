@@ -35,7 +35,6 @@ app.use((err, _req, res, _next) => {
 });
 
 
-// Eureka registration
 const client = new Eureka.Eureka({
   instance: {
     app: 'MCSV-SERVICE',

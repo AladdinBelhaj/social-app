@@ -41,9 +41,7 @@ async def lifespan(app: FastAPI):
     await init_db()
     logger.info("Database initialized successfully")
     
-    # Register with Eureka using init_async
     try:
-        # Use init_async instead of init
         await eureka_client.init_async(
             eureka_server="http://localhost:8761/eureka",
             app_name="MESSAGING-SERVICE",
