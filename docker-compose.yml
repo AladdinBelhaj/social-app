@@ -4,7 +4,6 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
       - "3306:3306"
@@ -52,7 +51,6 @@ services:
     environment:
       - DB_HOST=mysql-db
       - DB_USER=root
-      - DB_PASSWORD=rootpassword
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
@@ -67,7 +65,6 @@ services:
     environment:
       - DB_HOST=mysql-db
       - DB_USER=root
-      - DB_PASSWORD=rootpassword
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
@@ -82,7 +79,6 @@ services:
     environment:
       - DB_HOST=mysql-db
       - DB_USER=root
-      - DB_PASSWORD=rootpassword
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
     depends_on:
       - eureka-server
