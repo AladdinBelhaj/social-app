@@ -1,0 +1,102 @@
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./MCSV/server/schema.sql:/docker-entrypoint-initdb.d/01_mcsv.sql
+      - ./pub-service/backend/schema.sql:/docker-entrypoint-initdb.d/02_pub.sql
+      - ./messagingMicroService/schema.sql:/docker-entrypoint-initdb.d/03_messaging.sql
+    networks:
+      - social-network
+
+  eureka-server:
+    build: ./projet-mcs/EurekaServ
+    ports:
+      - "8761:8761"
+    networks:
+      - social-network
+
+  config-server:
+    build: ./projet-mcs/config-server
+    ports:
+      - "8888:8888"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+    networks:
+      - social-network
+
+  gateway-service:
+    build: ./projet-mcs/gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - config-server
+    networks:
+      - social-network
+
+  mcsv-service:
+    build: ./MCSV/server
+    ports:
+      - "4000:4000"
+    environment:
+      - DB_HOST=mysql-db
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - mysql-db
+    networks:
+      - social-network
+
+  pub-service:
+    build: ./pub-service/backend
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=mysql-db
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - mysql-db
+    networks:
+      - social-network
+
+  messaging-service:
+    build: ./messagingMicroService
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_HOST=mysql-db
+      - DB_USER=root
+      - DB_PASSWORD=rootpassword
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka/
+    depends_on:
+      - eureka-server
+      - mysql-db
+    networks:
+      - social-network
+
+  frontend:
+    build: ./merged
+    ports:
+      - "80:80"
+    networks:
+      - social-network
+
+networks:
+  social-network:
+    driver: bridge

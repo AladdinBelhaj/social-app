@@ -10,4 +10,4 @@ COPY src ./src
 
 RUN ./mvnw package -DskipTests
 
-CMD ["java", "-jar", "target/EurekaServ-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "target/config-server-0.0.1-SNAPSHOT.jar"]
